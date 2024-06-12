@@ -7,13 +7,21 @@ module.exports = (params) => {
 
      const { feedbackService } = params;
 
-    router.get('/', async(request, response) => {
-       const feedback =  await feedbackService.getList();
-        response.json(feedback);
+    router.get('/', async (request, response, next) => {
+        try {
+            const feedback =  await feedbackService.getList();
+            return response.json(feedback);
+        } catch (err) {
+            return next(err);
+        }
     });
 
-     router.post('/:shortname', (request, response) => {
-        return response.send('Feedback form posted');
+    router.post('/:shortname', (request, respons, next) => {
+          try {
+            return response.send('Feedback form posted');
+         } catch (err) {
+            return next(err);
+        }
     });
     
 
