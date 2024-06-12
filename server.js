@@ -37,6 +37,7 @@ app.locals.siteName = "ROUX Meetups";
 app.use(express.static(path.join(__dirname, './static')));
 
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
 app.use(async(request, response, next) => {
     try {
