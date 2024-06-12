@@ -2,6 +2,7 @@ const express = require('express');
 const path = require('path');
 const cookieSession = require('cookie-session');
 const createError = require('http-errors');
+const bodyParser = require('body-parser');
 
 const SpeakerService = require('./services/SpeakerService');
 const FeedbackService = require('./services/FeedbackService');
@@ -34,6 +35,8 @@ app.set('views', path.join(__dirname, './views') )
 app.locals.siteName = "ROUX Meetups";
 
 app.use(express.static(path.join(__dirname, './static')));
+
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(async(request, response, next) => {
     try {
